@@ -6,11 +6,13 @@ from langchain.agents.middlweare import (
     ToolRetryMiddleware, 
     ModelFallbackMiddleware
 )
+from app.agents.analyst.tools import 
 import os
 import dotenv
 from app.core.settings import settings
 from app.agents.analyst.config import AnalystConfig
 from app.agents.analyst.prompts import analyst_prompt
+
 
 
 model = ChatOpenAI(
@@ -20,9 +22,9 @@ model = ChatOpenAI(
 
 )
 
-analyst_agent = ChatOpenAI(
-    model= "openai:gpt-5.4",
-    system_prompt=,
-    tools=[get_weather]
+analyst_agent = create_agent(
+    model= model.model,
+    system_prompt=analyst_prompt,
+
 )
 

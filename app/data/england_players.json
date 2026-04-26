@@ -9,8 +9,8 @@
     "group": "GROUP_L"
   },
   "squad": [
-    { "id": 1, "name": "Jordan Pickford", "position": "Goalkeeper", "club": "Everton", "nationality": "England", "dateOfBirth": "1994-03-07", "caps": 60 },
-    { "id": 2, "name": "Dean Henderson", "position": "Goalkeeper", "club": "Crystal Palace", "nationality": "England", "dateOfBirth": "1997-03-12", "caps": 2 },
+    { "id": 1, "name": "Jordan Pickford", "position": "Goalkeeper", "club": "Everton", "nationality": "England", "dateOfBirth": "1994-03-07", "caps": 60, "" },
+    { "id": 2, "name": "Dean Henderson", "position": "Goalkeeper", "club": "Crystal Palace", "nationality": "England", "dateOfBirth": "1997-03-12", "caps": 2, },
     { "id": 3, "name": "James Trafford", "position": "Goalkeeper", "club": "Burnley", "nationality": "England", "dateOfBirth": "2002-10-10", "caps": 1 },
     { "id": 4, "name": "Kyle Walker", "position": "Right-Back", "club": "AC Milan", "nationality": "England", "dateOfBirth": "1990-05-28", "caps": 82 },
     { "id": 5, "name": "Trent Alexander-Arnold", "position": "Right-Back", "club": "Real Madrid", "nationality": "England", "dateOfBirth": "1998-10-07", "caps": 34 },
@@ -34,6 +34,7 @@
     { "id": 23, "name": "Ollie Watkins", "position": "Centre-Forward", "club": "Aston Villa", "nationality": "England", "dateOfBirth": "1995-12-30", "caps": 22 },
     { "id": 24, "name": "Ivan Toney", "position": "Centre-Forward", "club": "Al-Ahli", "nationality": "England", "dateOfBirth": "1996-03-16", "caps": 8 },
     { "id": 25, "name": "Eberechi Eze", "position": "Attacking Midfield", "club": "Crystal Palace", "nationality": "England", "dateOfBirth": "1998-06-29", "caps": 10 },
-    { "id": 26, "name": "Curtis Jones", "position": "Central Midfield", "club": "Liverpool", "nationality": "England", "dateOfBirth": "2001-01-30", "caps": 6 }
+    { "id": 26, "name": "Curtis Jones", "position": "Central Midfield", "club": "Liverpool", "nationality": "England", "dateOfBirth": "2001-01-30", "caps": 6 },
+    { "id": 27, "name": "Marcus Rashford", "position": "Centre-Forward", "club": "Manchester United", "nationality": "England", "dateOfBirth": "1997-10-31", "caps": 55 }
   ]
 }
