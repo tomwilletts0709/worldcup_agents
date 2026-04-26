@@ -1,10 +1,13 @@
-from sqlalcemy import create_engine
+from sqlmodel import Field, Session, SQLModel, create_engine
 
 DATABASE_URL = "postgresql://postgres:postgres@localhost:5432/postgres"
 
-engine = create_engine(DATABASE_URL) 
+engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False}) 
+SQLModel.metadata.create_all(engine)
 
-session_local = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+def get_session(): 
+    with Session(engine) as session: 
+        yield session
 
-base = declarative_base()
+
 
