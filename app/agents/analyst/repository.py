@@ -20,5 +20,19 @@ class AnalystRepository:
         self.db.refresh(analysis)
         return 
     
+    def get_by_id(self, analysis_id: int) -> AnalystAgent: 
+        statement = select(Analysis).where(Analysis.id == analysis_id)
+        result = self.db.exec(statement).first()
+        return result
+    
     def get_by_topic(self, topic: str) -> list[Analysis]: 
-        stat
+        statement = select(Analysis).where(Analysis.topic == topic)
+        result = self.db.exec(statement).all()
+        return result
+    
+    def delete(self, analysis_id: int) -> None: 
+        statement = select(Analysis).where(Analysis.id == analysis_id)
+        result = self.db.exec(statement).first()
+        if result: 
+            self.db.delete(result)
+            self.db.commit()
