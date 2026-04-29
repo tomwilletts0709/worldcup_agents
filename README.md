@@ -1,4 +1,4 @@
-# England World Cup Agent
+# England World Cup Agent System
 
 An agentic football companion for following England through the World Cup.
 
@@ -7,9 +7,9 @@ agent ecosystem, with specialist agents that can track England fixtures, analyse
 players and opponents, reason about lineups, prepare match briefings, and make
 predictions as the tournament unfolds.
 
-With a terrible season for West Bromwich Albion behind me, I thought I would get
-behind England to increase the chances of winning something. Sensible? No.
-Emotionally necessary? Absolutely.
+After a pretty awful season following West Bromwich Albion, I thought I'd cheer myself 
+up by really backing England to win the world cup. Usually I'm pretty negative about England's 
+chances.. but not this year!
 
 ## Project Status
 
@@ -58,7 +58,7 @@ state and multi-step routing become useful.
 - LangChain and `langchain-openai` for agent workflows.
 - SQLModel and PostgreSQL for persistent data.
 - Redis and Celery hooks for background or cached work.
-- Football-data.org as the football data source.
+- Football-data.org as the football data source. Need to workout better data sources. 
 - Langfuse for observability, traces, prompt debugging, and evaluation.
 - Pytest for tests.
 - `uv` for dependency management.
@@ -172,8 +172,6 @@ the API shape settles.
 
 ## Notes
 
-This is a learning and build-in-public style project. The architecture may
-change as the agent boundaries become clearer, but the north star stays the
+The architecture may change as the agent boundaries become clearer, but the north star stays the
 same: make an agentic system that can follow England properly, explain its
-thinking, and give me something cheerful to obsess over after the Hawthorns has
-done what the Hawthorns does.
+thinking, and hopefully we'll win the world cup. 

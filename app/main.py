@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.core.settings import settings
 from app.core.limiter import limiter 
 from app.core.logging import logger
+from app.db import init_db
 from contextlib import asynccontextmanager
 from datetime import datetime, timedelta
 from slowapi import _rate_limit_exceeded_handler
@@ -15,9 +16,10 @@ import uvicorn
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """ hand;e apploication startup and shutdown events """
+    init_db()
     logger.info(
-        "application starting up at %s", datetime.now().isoformat(), 
-        project="main", 
+        "application starting up at %s", datetime.now().isoformat(),
+        project="main",
         event="startup",
         version="1.0.0"
     )

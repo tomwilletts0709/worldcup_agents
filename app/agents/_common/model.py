@@ -1,6 +1,6 @@
-from sqmodel import SQLModel, Field
+from sqlmodel import SQLModel, Field
 from datetime import datetime
-friom enum import Enum
+from enum import Enum
 
 class AgentRunningStatus(str, Enum):
     STOPPED = "stopped"
