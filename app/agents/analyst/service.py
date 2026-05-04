@@ -1,10 +1,10 @@
-from typing import List, Any
-
-from app.agents.analyst.agent import analyst_agent
-from app.agents.analyst.config import AnalystConfig
-from app.agents.analyst.repository import AnalystRepository
-from app.agents.analyst.models import AnalysisType, AnalysisStatus
-
+from typing import Any
+from app.agents.analyst.agent import run_team_analysis
+from app.agents.analyst.models import Analysis, AnalysisType, AnalysisStatus
+from app.agents.analyst.exceptions import (
+    InvalidInputException,
+    AnalysisFailedException,
+)
 
 class AnalystService: 
     def __init__(self, analyst_agent):
@@ -34,19 +34,18 @@ class AnalystService:
 
         try:
             analysis.status = AnalysisStatus.RUNNING
-            self.repository.update(analysis)
+            analysis = self.repository.update(analysis)
 
-            result = self.agent.invoke(
-                {
-                    "messages":[
-                        {
-                            "role":"user",
-                            "co"
-                        }
-                    ]
-                }
+            report = await run_team_analysis(
+                team_name=team_name,
+                user_id=user_id
             )
 
+            analysis.output = report 
+            analysis.stats = AnalysisStatus.COMPLETED
+
+            
+            
     async def scout_opposition(self, team_name: str, player_name: str, user_id: str) -> Analysis: 
         report = Scout_Report(
             team_name=team_name,
