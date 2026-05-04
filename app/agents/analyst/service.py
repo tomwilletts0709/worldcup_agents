@@ -1,13 +1,14 @@
 from typing import Any
 from app.agents.analyst.agent import run_team_analysis
-from app.agents.analyst.models import Analysis, AnalysisType, AnalysisStatus
+from app.agents.analyst.repository import AnalystRepository
+from app.agents.analyst.schemas import Analysis, AnalysisType, AnalysisStatus
 from app.agents.analyst.exceptions import (
     InvalidInputException,
     AnalysisFailedException,
 )
 
 class AnalystService: 
-    def __init__(self, analyst_agent):
+    def __init__(self, analyst_agent,):
         self.agent = agent
         self.config = config
         self.tools = tools
@@ -46,16 +47,29 @@ class AnalystService:
 
             
             
-    async def scout_opposition(self, team_name: str, player_name: str, user_id: str) -> Analysis: 
+    async def scout_opposition(self, team_name: str, player_name: str, user_id: str, opposition_team: str) -> Analysis: 
         report = Scout_Report(
             team_name=team_name,
             player_name=player_name,
+            opposition_name = opposition_team
+            analysis_type= AnalysisType.NEXT_OPPOSITION
             status=AnalysisStatus.PENDING
         )
-        report = self.repository.create(report)
-        if report is None:
-            raise ValueError
+
+        report = self.repository.create(analysis)
         
+        try: 
+            self.analysis_status = AnalysisStatus.RUNNING
+            analysis = self.repository.update(analysis)
+
+            report = await run_opposition_analysis(
+                user_id=user_id
+                team_name=team_name,
+                opposition_team=opposition_team
+            )
+
+            analysis.output = report 
+            analysis.stats = AnalysisStatus.COMPLETED
         
 
 #need to add ability to 
