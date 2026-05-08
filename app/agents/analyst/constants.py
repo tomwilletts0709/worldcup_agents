@@ -1,0 +1,4 @@
+
+
+ANALYST_AGENT_NAME = "Analyst"
+ANALYST_AGENT_DISPLAY_NAME = "Analyst Agent"

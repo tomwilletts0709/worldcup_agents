@@ -9,11 +9,11 @@ from langchain.agents.middleware import (
     ToolRetryMiddleware, 
     ModelFallbackMiddleware
 )
-from app.agents.analyst.tools import 
+from app.agents.analyst.agent_tools import 
 from app.core.settings import settings
 from app.agents.analyst.config import AnalystConfig
 from app.agents.analyst.prompts import analyst_prompt
-from app.agents.analyst.tools import get_user_memory, save_user_memory, get_player_stats, generate_report, tavily_search_tool
+from app.agents.analyst.agent_tools import get_user_memory, save_user_memory, get_player_stats, generate_report, tavily_search_tool
 
 
 
@@ -30,16 +30,23 @@ model = ChatOpenAI(
 
 )
 
-sub_agent = create_agent(
-    model=model,
+scount_agent = create_agent(
+    model="openai:gpt-5.4",
     tools = [tool]
 )
+
+@tool("scout_agent", description="subagent that is called scout the next opposition")
+def call_subagent(query: str): 
+    result = subagent.invoke({
+        "messages": [{"role": "user", "content": query}]
+    })
+    return result["messages"][-1].content
 
 
 analyst_agent = create_agent(
     model= model.model,
     system_prompt=analyst_prompt,
-    tools=[get_user_memory, save_user_memory, get_player_stats, generate_report, tavily_search_tool],
+    tools=[call_subagent, get_user_memory, save_user_memory, get_player_stats, generate_report, tavily_search_tool],
     middleware=[
         SummarizationMiddleware(
             model="gpt-5.4-mini",

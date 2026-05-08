@@ -1,4 +1,4 @@
-from sqlmodel import SQLModel, Field
+from pydantic import BaseModel, Field
 from datetime import datetime
 from enum import Enum
 
@@ -8,8 +8,8 @@ class AgentRunningStatus(str, Enum):
     PAUSED = "paused"
 
 
-class AgentBase(SQLModel, table=True): 
-    id: int = Field(default=None, primary_key=True)
+class AgentBase(BaseModel): 
+    id: int 
     name: str
     description: str
     status: AgentRunningStatus = AgentRunningStatus.STOPPED

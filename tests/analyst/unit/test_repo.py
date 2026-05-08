@@ -1,7 +1,7 @@
 from app.agents.analyst.repository import AnalystRepository
 import pytest
 from sqlmodel import SQLModel, create_engine, Session
-from app.agents.analyst.models import Analysis
+from app.agents.analyst.schemas import Analysis
 
 
 @pytest.fixture

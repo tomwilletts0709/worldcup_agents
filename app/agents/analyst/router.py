@@ -1,4 +1,4 @@
-from typiunt import List
+from typing import Any
 from langchain.chat_models import ChatOpenAI
 from langchain.agents import create_agent
 from app.analyst.agent import analyst_agent

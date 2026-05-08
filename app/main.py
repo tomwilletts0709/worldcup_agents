@@ -45,10 +45,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
-
-
-
 @app.get("/health")
 @limiter.limit("10/minute")
 async def health_check(request: Request)-> Dict[str, Any]:

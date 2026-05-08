@@ -1,7 +1,6 @@
-from sqlalchemy import String, cast, select
-from sqlalchemy.orm import Session
-
-from app.agents.analyst.models import Analysis
+from sqlmodel import Session, select
+from sqlalchemy import cast, String
+from app.agents.analyst.schemas import AnalystAgent, AnalystAgentInput, Analysis
 
 class AnalystRepository:
     def __init__(self, db: Session):
@@ -28,26 +27,32 @@ class AnalystRepository:
     def get_by_id(self, analysis_id: int) -> Analysis:
         if analysis_id is None:
             raise ValueError("analysis_id cannot be None")
-        return self.db.get(Analysis, analysis_id)
+        statement = select(Analysis).where(Analysis.id == analysis_id)
+        result = self.db.exec(statement).first()
+        return result
 
     def get_by_topic(self, topic: str) -> list[Analysis]:
         statement = select(Analysis).where(cast(Analysis.topic, String).contains(topic))
-        return list(self.db.scalars(statement).all())
+        result = self.db.exec(statement).all()
+        return result
 
     def get_by_player(self, player_name: str) -> list[Analysis]:
         if not player_name:
             raise ValueError("player_name cannot be empty")
         statement = select(Analysis).where(Analysis.player_name == player_name)
-        return list(self.db.scalars(statement).all())
+        result = self.db.exec(statement).all()
+        return result
 
     def get_by_team(self, team_name: str) -> list[Analysis]:
         if not team_name:
             raise ValueError("team_name cannot be empty")
         statement = select(Analysis).where(Analysis.team_name == team_name)
-        return list(self.db.scalars(statement).all())
+        result = self.db.exec(statement).all()
+        return result
     
     def delete(self, analysis_id: int) -> None: 
-        result = self.db.get(Analysis, analysis_id)
+        statement = select(Analysis).where(Analysis.id == analysis_id)
+        result = self.db.exec(statement).first()
         if result: 
             self.db.delete(result)
             self.db.commit()
