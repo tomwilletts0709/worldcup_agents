@@ -15,16 +15,8 @@ class AnalystRepository:
         self.db.refresh(analysis)
         return analysis
 
-    def update(self, analysis: Analysis) -> Analysis:
-        if analysis.id is None:
-            raise ValueError("Cannot update an Analysis that has not been saved")
-        self.db.add(analysis)
-        self.db.flush()
-        self.db.commit()
-        self.db.refresh(analysis)
-        return analysis
 
-    def get_by_id(self, analysis_id: int) -> Analysis:
+    def update(self, analysis_id: int) -> Analysis:
         if analysis_id is None:
             raise ValueError("analysis_id cannot be None")
         statement = select(Analysis).where(Analysis.id == analysis_id)

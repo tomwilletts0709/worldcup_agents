@@ -54,6 +54,8 @@ class AnalystAgentInput(Base):
     fixture_id: Mapped[Optional[int]] = mapped_column(Integer, nullable=True)
     session_id: Mapped[Optional[int]] = mapped_column(Integer, nullable=True)
 
+    
+
 
 class Analysis(Base):
     __tablename__ = "analyses"
