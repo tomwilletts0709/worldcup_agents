@@ -17,10 +17,14 @@ class AnalystRepository:
 
 
     def update(self, analysis_id: int) -> Analysis:
-        if analysis_id is None:
-            raise ValueError("analysis_id cannot be None")
         statement = select(Analysis).where(Analysis.id == analysis_id)
         result = self.db.exec(statement).first()
+        if result is None: 
+            raise ValueError("No result found")
+
+        self.db.commit()
+        self.db.refresh(result)
+
         return result
 
     def get_by_topic(self, topic: str) -> list[Analysis]:
